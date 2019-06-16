@@ -67,7 +67,7 @@ resource "aws_iam_group_policy" "with_mfa" {
   count  = local.enabled && local.require_mfa ? 1 : 0
   name   = module.label.id
   group  = join("", aws_iam_group.default.*.id)
-  policy = data.aws_iam_policy_document.with_mfa.json
+  policy = data.aws_iam_policy_document.with_mfa[count.index].json
 }
 
 data "aws_iam_policy_document" "without_mfa" {
@@ -88,5 +88,5 @@ resource "aws_iam_group_policy" "without_mfa" {
   count  = local.enabled && local.require_mfa == false ? 1 : 0
   name   = module.label.id
   group  = join("", aws_iam_group.default.*.id)
-  policy = data.aws_iam_policy_document.without_mfa.json
+  policy = data.aws_iam_policy_document.without_mfa[count.index].json
 }
