@@ -1,10 +1,10 @@
 variable "user_names" {
-  type        = list
+  type        = list(any)
   description = "A list of IAM User names to associate with the Group"
 }
 
 variable "role_arns" {
-  type        = map
+  type        = map(any)
   default     = {}
   description = "A map of alias -> IAM Role ARNs the users in the Group can assume"
 }
@@ -49,7 +49,7 @@ variable "delimiter" {
 }
 
 variable "attributes" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "Additional attributes (e.g. `1`)"
 }
